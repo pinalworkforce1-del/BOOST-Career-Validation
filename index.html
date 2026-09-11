@@ -32,11 +32,22 @@
   <div id="interestCarry"></div>
   <p class="sub">BOOST keeps the same SOC record so jobs, wage, preparation, pathway, and later mobility evidence stay attached to the career you actually selected.</p>
  </section>
+ <section class="panel" id="wageBaselinePanel">
+  <div class="step">Your Wage Baseline • Required</div>
+  <h2>What are you earning now, or what did you earn in your most recent job?</h2>
+  <p class="sub">Use your current or most recent hourly wage. BOOST uses this baseline to compare your current earnings with each career's likely point-of-entry wage. A lower starting wage does not automatically make a career a poor choice—it becomes part of the informed decision.</p>
+  <div class="responseGrid">
+   <div><label for="currentHourlyWage">Current / most recent hourly wage</label><input id="currentHourlyWage" type="number" min="1" max="250" step="0.01" inputmode="decimal" placeholder="e.g., 21.50" required></div>
+   <div style="align-self:end;padding:10px 12px;border-radius:11px;background:#eef7fb;border:1px solid #c9dde8"><b id="wageBaselineAnnual">Enter the hourly wage from your current or most recent job.</b><div class="note">Annualized comparisons use 2,080 paid hours and do not include overtime, benefits, taxes, or unpaid time.</div></div>
+  </div>
+  <div id="wageBaselineMessage" class="note" style="display:none;margin-top:10px;color:#8a3e2c;font-weight:800"></div>
+ </section>
  <section id="careers"></section>
- <div class="bar" id="bar"><div><b>Save my Career Reality Check</b><br><small>Evidence will continue with these same careers into Career Mobility and Decide.</small></div><button id="saveBtn" type="button">Save Module 2 Evidence →</button></div>
+ <div class="bar" id="bar"><div><b>Save my Career Reality Check</b><br><small>Complete your wage baseline and career evidence. Everything will carry into Career Mobility, Decide, and your Career Decision Report.</small></div><button id="saveBtn" type="button">Save Module 2 Evidence →</button></div>
  <div class="completion" id="completion"></div>
 </div></main>
 <script src="assets/module2-evidence-prod.js"></script>
 <script src="assets/module2-prep-readiness-prod.js"></script>
+<script src="assets/module2-wage-baseline-v1.js?v=20260910a"></script>
 </body>
 </html>
