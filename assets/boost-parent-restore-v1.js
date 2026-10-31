@@ -5,6 +5,21 @@ const allowed=new Set(['https://pinal.boostpathways.org','https://pinalworkforce
 const key='pinal_boost_career_exploration_v1';
 function request(){window.parent.postMessage({type:'pinal-boost-module-restore-request',module:'module2'},'*')}
 window.addEventListener('message',function(e){
+ if(e.source!==window.parent||!allowed.has(e.origin)||e.data?.type!=='pinal-boost-module2-collect')return;
+ try{
+   const stored=JSON.parse(localStorage.getItem(key)||'{}')||{};
+   const module2=stored.module2||{};
+   const answers=typeof collect==='function'?collect():module2.validationBySoc||{};
+   window.parent.postMessage({type:'pinal-boost-module2-current',requestId:String(e.data.requestId||''),module2:{
+     validationBySoc:answers,
+     intelligenceVersion:module2.intelligenceVersion||'QI-v1/BLS-baseline-v1',
+     wageBaseline:module2.wageBaseline||null,
+     currentHourlyWage:module2.currentHourlyWage||module2.wageBaseline?.hourly||null,
+     completedAt:module2.completedAt||null
+   }},e.origin);
+ }catch(err){console.warn('Module 2 evidence collection failed',err)}
+});
+window.addEventListener('message',function(e){
  if(e.source!==window.parent||!allowed.has(e.origin)||e.data?.type!=='pinal-boost-module-restore'||e.data.module!=='module2')return;
  const payload=e.data.state;if(!payload||!Array.isArray(payload.module1?.selected)||!payload.module1.selected.length)return;
  try{
