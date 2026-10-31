@@ -9,6 +9,13 @@ window.addEventListener('message',function(e){
  const payload=e.data.state;if(!payload||!Array.isArray(payload.module1?.selected)||!payload.module1.selected.length)return;
  try{
   const prior=JSON.parse(localStorage.getItem(key)||'{}')||{};
+  // Preserve unsaved or newly completed local validation while the cloud lacks Module 2.
+  const locallyCompleted=!!prior.module2?.completedAt&&Object.keys(prior.module2?.validationBySoc||{}).length>0;
+  const cloudHasValidation=Object.keys(payload.module2?.validationBySoc||{}).length>0;
+  if(locallyCompleted&&!cloudHasValidation){
+    window.dispatchEvent(new CustomEvent('pinal-boost-module2-local-recovery',{detail:{ready:true}}));
+    return;
+  }
   const next={...prior,module1:{...(prior.module1||{}),...payload.module1},
     module2:{...(prior.module2||{}),...(payload.module2||{})},
     module3:{...(prior.module3||{}),...(payload.module3||{})},
