@@ -14,7 +14,7 @@ window.addEventListener('message',function(e){
      validationBySoc:answers,
      intelligenceVersion:module2.intelligenceVersion||'QI-v1/BLS-baseline-v1',
      wageBaseline:module2.wageBaseline||null,
-     currentHourlyWage:module2.currentHourlyWage||module2.wageBaseline?.hourly||null,
+     currentHourlyWage:module2.currentHourlyWage||module2.wageBaseline?.hourly||stored.participant?.currentHourlyWage||null,
      completedAt:module2.completedAt||null
    }},e.origin);
  }catch(err){console.warn('Module 2 evidence collection failed',err)}
